@@ -1,0 +1,61 @@
+﻿@model IEnumerable<prjSocaWeb.Models.tEmp>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<main>
+    
+
+    <div class="container mt-3">
+        <h2>員工表</h2>
+        <a href="@Url.Action("Create")" class="btn btn-info text-white">新增員工</a>
+        <div class=" mt-3" />
+        @if (Model.Count() != 0)
+        {
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-primary">
+                        <td>
+                            @Html.LabelFor(m => m.FirstOrDefault().fEmpId)
+                        </td>
+                        <td>
+                            @Html.LabelFor(m => m.FirstOrDefault().fName)
+                        </td>
+
+                        <td>
+                            @Html.LabelFor(m => m.FirstOrDefault().fSalary)
+                        </td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.fEmpId</td>
+                            <td>@item.fName</td>
+                            <td>@item.fSalary</td>
+                            <td>
+                                <a href="@Url.Action("Delete")?id=@item.Id" class="btn btn-danger">X</a>
+
+                                <a href="@Url.Action("Edit")?id=@item.Id" class="btn btn-warning">編輯</a>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+        }else
+            {
+
+            <div class=" alert alert-success" >
+                <strong>訊息!</strong>目前沒有員工紀錄
+            </div>
+
+            }
+
+    </div>
+</main>
